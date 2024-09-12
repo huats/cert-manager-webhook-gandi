@@ -2,16 +2,15 @@
 
 `cert-manager-webhook-gandi` is an ACME webhook for [cert-manager]. It provides an ACME (read: Let's Encrypt) webhook for [cert-manager], which allows to use a `DNS-01` challenge with [Gandi]. This allows to provide Let's Encrypt certificates to [Kubernetes] for service protocols other than HTTP and furthermore to request wildcard certificates. Internally it uses the [Gandi LiveDNS API] to communicate with Gandi.
 
-
 ## What does the fork do?
 
 This repository is a fork of [bwolf/cert-manager-webhook-gandi] with the following changes:
 
- - The dependencies have been updated to newer versions
- - A few pending pull requests on the upstream repository have been merged
- - The software container image is hosted on GitHub
- - The Helm chart is hosted on GitHub
- - Secret handled in the Helm Chart (SOPS is recommended to save the secrets).
+- The dependencies have been updated to newer versions
+- A few pending pull requests on the upstream repository have been merged
+- The software container image is hosted on GitHub
+- The Helm chart is hosted on GitHub
+- Secret handled in the Helm Chart (SOPS is recommended to save the secrets).
 
 ## Helm chart
 
@@ -24,17 +23,19 @@ Quoting the [ACME DNS-01 challenge]:
 > This challenge asks you to prove that you control the DNS for your domain name by putting a specific value in a TXT record under that domain name. It is harder to configure than HTTP-01, but can work in scenarios that HTTP-01 can’t. It also allows you to issue wildcard certificates. After Let’s Encrypt gives your ACME client a token, your client will create a TXT record derived from that token and your account key, and put that record at _acme-challenge.<YOUR_DOMAIN>. Then Let’s Encrypt will query the DNS system for that record. If it finds a match, you can proceed to issue a certificate!
 
 ## Building
+
 Build the container image `cert-manager-webhook-gandi:latest`:
 
     make build
 
 ## Image
+
 Ready made images are hosted on Docker Hub ([image tags]). Use at your own risk:
 
     ghcr.io/sintef/cert-manager-webhook-gandi
 
-
 ### Release History
+
 Refer to the [CHANGELOG](CHANGELOG.md) file.
 
 ## Testing with Minikube
@@ -66,7 +67,6 @@ Refer to the [CHANGELOG](CHANGELOG.md) file.
    Check the state and ensure that all pods are running fine (watch out for any issues regarding the `cert-manager-webhook-` pod and its volume mounts):
 
             kubectl describe pods -n cert-manager | less
-
 
 2. Deploy this webhook (add `--dry-run` to try it and `--debug` to inspect the rendered manifests; Set `logLevel` to 6 for verbose logs):
 
@@ -140,8 +140,8 @@ Refer to the [CHANGELOG](CHANGELOG.md) file.
 10. Uninstalling cert-manager:
     This is out of scope here. Refer to the official [documentation][cert-manager-uninstall].
 
-
 ## Conformance test
+
 Please note that the test is not a typical unit or integration test. Instead it invokes the web hook in a Kubernetes-like environment which asks the web hook to really call the DNS provider (.i.e. Gandi). It attempts to create an `TXT` entry like `cert-manager-dns01-tests.example.com`, verifies the presence of the entry via Google DNS. Finally it removes the entry by calling the cleanup method of web hook.
 
 As said above, the conformance test is run against the real Gandi API. Therefore you *must* have a Gandi account, a domain and an API key.
@@ -153,7 +153,6 @@ $EDITOR testdata/gandi/api-key.yaml
 TEST_ZONE_NAME=example.com. make test
 make clean
 ```
-
 
 [ACME DNS-01 challenge]: https://letsencrypt.org/docs/challenge-types/#dns-01-challenge
 [ACME documentation]: https://cert-manager.io/docs/configuration/acme/
