@@ -2,12 +2,13 @@ GO ?= $(shell which go)
 OS ?= $(shell $(GO) env GOOS)
 ARCH ?= $(shell $(GO) env GOARCH)
 
+GO_VERSION := "1.23"
 IMAGE_NAME := "sintef/cert-manager-gandi"
 IMAGE_TAG := "0.4.0"
 
 OUT := $(shell pwd)/_out
 
-KUBE_VERSION=1.25.0
+KUBE_VERSION=1.31.1
 
 $(shell mkdir -p "$(OUT)")
 export TEST_ASSET_ETCD=_test/kubebuilder/etcd
