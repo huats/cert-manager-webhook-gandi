@@ -13,9 +13,14 @@ helm repo add cert-manager-webhook-gandi https://sintef.github.io/cert-manager-w
 Install the chart:
 
 ```bash
-helm install cert-manager-webhook-gandi cert-manager-webhook-gandi/cert-manager-webhook-gandi -f gandiApiToken=XXX_EXAMPLE_XXX
+helm install cert-manager-webhook-gandi cert-manager-webhook-gandi/cert-manager-webhook-gandi -f gandiPat=XXX_EXAMPLE_XXX
 ```
 
+*or using the deprecated `gandiApiToken` secret*
+
+```bash
+helm install cert-manager-webhook-gandi cert-manager-webhook-gandi/cert-manager-webhook-gandi -f gandiApiToken=XXX_EXAMPLE_XXX
+```
 
 ## Values
 
@@ -27,7 +32,8 @@ helm install cert-manager-webhook-gandi cert-manager-webhook-gandi/cert-manager-
 | containerport | int | `8443` | Container port (in case you have restrictions on the listening port) |
 | features.apiPriorityAndFairness | bool | `true` | It is enabled by default since a while. |
 | fullnameOverride | string | `""` | Set to override the fullname |
-| gandiApiToken | string | `""` | The secret is not created if not set. |
+| gandiPat | string | `""` | The secret is not created if not set. |
+| ~~gandiApiToken~~ | string | `""` | **Deprecated**. The secret is not created if not set. |
 | groupName | string | `"acme.bwolf.me"` | "Group is the API group name this server hosts", if you find this description helful. |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"ghcr.io/sintef/cert-manager-webhook-gandi"` | Image name |
