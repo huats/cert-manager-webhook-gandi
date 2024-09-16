@@ -146,12 +146,21 @@ Please note that the test is not a typical unit or integration test. Instead it 
 
 As said above, the conformance test is run against the real Gandi API. Therefore you *must* have a Gandi account, a domain and an API key.
 
-``` shell
+```shell
+# With API key
 cp testdata/gandi/api-key.yaml.sample testdata/gandi/api-key.yaml
+cp testdata/gandi/api-key-config.json.sample testdata/gandi/config.json
 echo -n $YOUR_GANDI_API_KEY | base64 | pbcopy # or xclip
 $EDITOR testdata/gandi/api-key.yaml
+# With Personal Access Token (PAT)
+cp testdata/gandi/pat.yaml.sample testdata/gandi/pat.yaml
+cp testdata/gandi/pat-config.json.sample testdata/gandi/config.json
+echo -n $YOUR_GANDI_PAT | base64 | pbcopy # or xclip
+$EDITOR testdata/gandi/pat.yaml
+
 TEST_ZONE_NAME=example.com. make test
 make clean
+
 ```
 
 [ACME DNS-01 challenge]: https://letsencrypt.org/docs/challenge-types/#dns-01-challenge

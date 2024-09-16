@@ -1,0 +1,6 @@
+{
+  "patSecretRef": {
+    "name": "gandi-pat",
+    "key": "pat"
+  }
+}

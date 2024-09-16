@@ -174,7 +174,7 @@ func (c *gandiDNSProviderSolver) CleanUp(ch *v1alpha1.ChallengeRequest) error {
 
 	_, err = gandiClient.GetDomainRecordByNameAndType(root, subdomain, "TXT")
 	if err != nil {
-		klog.V(6).Infof("There is no entry of TXT matching, do nothing", subdomain+root, ch.Key)
+		klog.V(6).Infof("There is no entry of TXT matching, do nothing: %v", err)
 	} else {
 		err := gandiClient.DeleteDomainRecord(root, subdomain, "TXT")
 		if err != nil {
